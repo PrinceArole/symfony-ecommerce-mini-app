@@ -1,0 +1,45 @@
+    <nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
+
+        <div class="container">
+            <a class="navbar-brand" href="{{ path('app_home') }}">E-mini<span>.</span></a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarsFurni">
+                <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+                    <li class="nav-item {{ app.request.attributes.get('_route') == 'app_home' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ path('app_home') }}">Acceuil</a>
+                    </li>
+                    {# <li class="nav-item {{ app.request.attributes.get('_route') == 'cart_show' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ path('cart_show') }}">🛒 Panier</a>
+                    </li> #}
+
+                    {# ADMIN ONLY #}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item {{ app.request.attributes.get('_route') == 'app_product_index' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ path('app_product_index') }}"> Produits</a>
+                        </li>
+                    {% endif %}
+                   
+                </ul>
+
+                
+                <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0">
+                    {% if not app.user %}
+                        <li><a class="nav-link" href="{{ path('app_login') }}">Connexion </a></li>
+                        <li><a class="nav-link" href="{{ path('app_register') }}">Inscription</a></li>
+                    {% else %}
+                
+                        <li><a class=" btn btn-danger" href="{{ path('app_logout') }}">Deconnexion </a></li>
+                    
+                    {% endif %}
+                        <li><a class="nav-link" href="{{ path('cart_show') }}"><img src="{{ asset('assets/images/cart.svg') }}"></a></li>
+                </ul>
+
+
+            </div>
+        </div>
+            
+    </nav>

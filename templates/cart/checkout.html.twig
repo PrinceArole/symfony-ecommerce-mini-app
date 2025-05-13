@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commande validée{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="alert alert-success text-center">
+        ✅ Merci ! Votre commande a bien été enregistrée.
+    </div>
+
+    <h4 class="mb-4">Récapitulatif de votre commande :</h4>
+
+    <table class="table table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th>Produit</th>
+                <th>Quantité</th>
+                <th>Prix unitaire</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+                <tr>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.product.price|number_format(2, ',', ' ') }} €</td>
+                    <td>{{ (item.product.price * item.quantity)|number_format(2, ',', ' ') }} €</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h5 class="text-end">Total payé : <strong>{{ total|number_format(2, ',', ' ') }} €</strong></h5>
+
+    <div class="text-center mt-4">
+        <a href="{{ path('app_home') }}" class="btn btn-primary"> Retour à la boutique</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon panier{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h2 class="mb-4"> Mon panier</h2>
+
+    {% if items is empty %}
+        <div class="alert alert-info">
+            Votre panier est vide.
+        </div>
+    {% else %}
+        <table class="table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Produit</th>
+                    <th>Quantité</th>
+                    <th>Prix unitaire</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                    <tr>
+                        <td>{{ item.product.name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.product.price|number_format(2, ',', ' ') }} €</td>
+                        <td>{{ (item.product.price * item.quantity)|number_format(2, ',', ' ') }} €</td>
+                        <td>
+                            <a href="{{ path('cart_remove', {id: item.product.id}) }}" class="btn btn-sm btn-danger">Retirer</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="text-end">
+            <h4>Total : <span class="text-success">{{ total|number_format(2, ',', ' ') }} €</span></h4>
+            <a href="{{ path('cart_clear') }}" class="btn btn-outline-secondary mt-2">Vider le panier</a>
+            <a href="{{ path('cart_checkout') }}" class="btn btn-primary mt-2">Valider la commande</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+

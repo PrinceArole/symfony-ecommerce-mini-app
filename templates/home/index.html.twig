@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello!{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1 class="text-center">🎉 Bienvenue sur notre mini e-commerce Symfony</h1>
+        <p class="text-center text-muted">Explorez, ajoutez au panier et validez vos commandes fictives !</p>
+    </div>
+
+    <div class="container mt-5">
+    <h2 class="text-center mb-4"> Nos Produits</h2>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for product in products %}
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    {% if product.image %}
+                        <img src="{{ asset('uploads/' ~ product.image) }}" class="card-img-top" alt="{{ product.name }}">
+                    {% else %}
+                        <img src="{{ asset('assets/images/default.jpg') }}" class="card-img-top" alt="Image par défaut">
+                    {% endif %}
+
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text text-muted">{{ product.description|slice(0, 60) ~ '...' }}</p>
+                        <p class="card-text"><strong>{{ product.price|number_format(2, ',', ' ') }} €</strong></p>
+
+                        <div class="mt-auto d-flex justify-content-between">
+                            <a href="{{ path('product_show', {'id': product.id}) }}" class="btn btn-outline-primary btn-sm">Voir</a>
+                            <a href="{{ path('cart_add', {'id': product.id}) }}" class="btn btn-success btn-sm"> Ajouter</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <p>Aucun produit disponible.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

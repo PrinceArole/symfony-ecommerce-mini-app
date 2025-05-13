@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Product{% endblock %}
+
+{% block body %}
+     <div class="container my-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-6">
+                <div class="card p-4">
+                    <h1 class="card-title">Edit Product</h1>
+                    <div class="card-body">
+                        {{ include('product/_form.html.twig', {'button_label': 'Update'}) }}
+                    </div>
+                    <div class="card-footer">
+                       <div class="d-flex justify-content-between">
+                            <a class="btn btn-secondary" href="{{ path('app_product_index') }}">back to list</a>
+
+                            {{ include('product/_delete_form.html.twig') }}
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}
