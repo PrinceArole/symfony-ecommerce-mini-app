@@ -53,5 +53,5 @@ Ce projet est un mini site e-commerce développé avec le framework **Symfony 6*
 
 1. Cloner le projet :
 ```bash
-git clone <lien du repo>
+git clone https://github.com/PrinceArole/symfony-ecommerce-mini-app.git
 cd mon-projet
